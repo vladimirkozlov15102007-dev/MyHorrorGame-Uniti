@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="refresh" content="0; url=./web-game/" />
+<title>Old Amber Factory — Loading...</title>
+<link rel="canonical" href="./web-game/" />
+<style>
+  html,body{margin:0;height:100%;background:#000;color:#d9a441;font-family:'Courier New',monospace;display:flex;align-items:center;justify-content:center}
+  .box{text-align:center;padding:40px;max-width:560px}
+  h1{letter-spacing:8px;font-size:38px;margin:0 0 10px;text-shadow:0 0 14px rgba(217,164,65,.5)}
+  h2{letter-spacing:3px;font-size:14px;color:#8a8477;margin:0 0 28px}
+  p{color:#b9b3a9;line-height:1.6}
+  a{color:#d9a441;text-decoration:none;border-bottom:1px solid #5a4419;padding-bottom:2px}
+  a:hover{background:rgba(217,164,65,.1)}
+  .spin{width:40px;height:40px;margin:20px auto;border:2px solid #3a2d11;border-top-color:#d9a441;border-radius:50%;animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>OLD AMBER FACTORY</h1>
+    <h2>ЗАБРОШЕННЫЙ ЗАВОД «ЯНТАРЬ»</h2>
+    <div class="spin"></div>
+    <p>
+      Loading browser game...<br/>
+      If you are not redirected automatically,
+      <a href="./web-game/">click here to enter the factory</a>.
+    </p>
+  </div>
+  <script>
+    // Fallback JS redirect in case meta refresh is disabled.
+    location.replace('./web-game/');
+  </script>
+</body>
+</html>
