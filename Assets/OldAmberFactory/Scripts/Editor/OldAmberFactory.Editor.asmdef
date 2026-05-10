@@ -1,0 +1,17 @@
+{
+    "name": "OldAmberFactory.Editor",
+    "rootNamespace": "OldAmberFactory.Editor",
+    "references": [
+        "OldAmberFactory.Runtime",
+        "Unity.AI.Navigation.Editor"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
