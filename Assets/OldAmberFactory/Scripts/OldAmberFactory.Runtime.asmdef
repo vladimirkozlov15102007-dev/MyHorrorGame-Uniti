@@ -1,0 +1,23 @@
+{
+    "name": "OldAmberFactory.Runtime",
+    "rootNamespace": "OldAmberFactory",
+    "references": [
+        "Unity.InputSystem",
+        "Unity.Cinemachine",
+        "Unity.AI.Navigation",
+        "Unity.RenderPipelines.HighDefinition.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.TextMeshPro",
+        "Unity.Mathematics",
+        "Unity.Burst"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
