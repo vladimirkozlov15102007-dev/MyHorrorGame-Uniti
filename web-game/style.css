@@ -1,0 +1,83 @@
+:root{
+  --amber:#d9a441;
+  --blood:#8a1616;
+  --steel:#9aa4ad;
+  --ink:#0b0d10;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#000;color:#cfd3d8;font-family:'Courier New',monospace;user-select:none}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+
+/* ------- overlays ------- */
+#vignette{position:fixed;inset:0;pointer-events:none;box-shadow:inset 0 0 260px 80px rgba(0,0,0,.9), inset 0 0 60px 10px rgba(0,0,0,.6);z-index:5}
+#scanlines{position:fixed;inset:0;pointer-events:none;z-index:6;mix-blend-mode:overlay;opacity:.08;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.5) 0 1px,transparent 1px 3px)}
+#blood{position:fixed;inset:0;pointer-events:none;z-index:7;opacity:0;transition:opacity .25s;
+  background:radial-gradient(ellipse at center,transparent 40%,rgba(138,22,22,.55) 100%)}
+#flash{position:fixed;inset:0;pointer-events:none;z-index:8;background:#fff;opacity:0;transition:opacity .12s}
+
+/* ------- HUD ------- */
+#hud{position:fixed;inset:0;pointer-events:none;z-index:10;font-size:12px;letter-spacing:1px}
+#hud.hidden{display:none}
+.corner{position:absolute;padding:18px;text-shadow:0 0 6px #000}
+.corner.tl{top:0;left:0}
+.corner.tr{top:0;right:0;text-align:right}
+.corner.bl{bottom:0;left:0;min-width:260px}
+.corner.br{bottom:0;right:0;text-align:right}
+
+#objective{color:var(--amber);font-size:13px;margin-bottom:6px;max-width:360px}
+#subtitle{color:#b9c0c7;font-style:italic;font-size:12px;max-width:420px;min-height:16px}
+#enemies{color:#c14b4b;font-size:13px;font-weight:bold}
+#zone{color:#8aa0b3;margin-top:4px}
+#ammo{font-size:28px;color:var(--amber);font-weight:bold}
+#weapon{color:#7d868e;margin-top:2px}
+
+.bar{display:flex;align-items:center;gap:8px;margin:4px 0}
+.bar label{width:28px;color:#9aa4ad}
+.bar .meter{flex:1;height:8px;background:#1b1e22;border:1px solid #2b3036;overflow:hidden;position:relative}
+.bar .meter > div{height:100%;background:linear-gradient(90deg,#7a1010,#c14b4b);transition:width .2s}
+.bar .meter.sta > div{background:linear-gradient(90deg,#4a6a12,#a3c84a)}
+.bar span{width:32px;text-align:right;color:#c14b4b}
+
+#crosshair{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;z-index:11;pointer-events:none;mix-blend-mode:difference}
+.ch{position:absolute;background:#e6e6e6}
+.ch-t{left:50%;top:0;width:2px;height:6px;transform:translateX(-50%)}
+.ch-b{left:50%;bottom:0;width:2px;height:6px;transform:translateX(-50%)}
+.ch-l{top:50%;left:0;width:6px;height:2px;transform:translateY(-50%)}
+.ch-r{top:50%;right:0;width:6px;height:2px;transform:translateY(-50%)}
+
+#prompt{position:fixed;left:50%;top:58%;transform:translateX(-50%);z-index:12;
+  padding:6px 14px;background:rgba(10,12,14,.78);border:1px solid var(--amber);color:var(--amber);font-size:14px;letter-spacing:2px}
+#prompt.hidden{display:none}
+
+#damage-dirs{position:fixed;inset:0;pointer-events:none;z-index:9}
+.dd{position:absolute;opacity:0;transition:opacity .3s}
+.dd-n{top:6%;left:50%;transform:translateX(-50%);width:160px;height:40px;background:linear-gradient(180deg,rgba(200,30,30,.8),transparent)}
+.dd-s{bottom:6%;left:50%;transform:translateX(-50%);width:160px;height:40px;background:linear-gradient(0deg,rgba(200,30,30,.8),transparent)}
+.dd-e{right:2%;top:50%;transform:translateY(-50%);width:40px;height:160px;background:linear-gradient(270deg,rgba(200,30,30,.8),transparent)}
+.dd-w{left:2%;top:50%;transform:translateY(-50%);width:40px;height:160px;background:linear-gradient(90deg,rgba(200,30,30,.8),transparent)}
+
+/* ------- menu / overlays ------- */
+#menu,.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at center,#1a1208 0%,#000 70%);color:#ddd}
+#menu.hidden,.overlay.hidden{display:none}
+.menu-inner{max-width:780px;padding:40px;text-align:center}
+#menu h1{font-size:54px;letter-spacing:8px;color:var(--amber);text-shadow:0 0 16px rgba(217,164,65,.5), 0 0 40px rgba(217,164,65,.25)}
+#menu h2{font-size:18px;color:#9a9389;letter-spacing:4px;margin:6px 0 22px}
+#menu .intro{color:#b9b3a9;line-height:1.55;font-size:15px;margin-bottom:26px}
+.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 24px;max-width:500px;margin:0 auto 26px;font-size:13px;color:#8a8477}
+.controls b{color:var(--amber)}
+button{background:transparent;border:1px solid var(--amber);color:var(--amber);font-family:inherit;
+  padding:14px 38px;font-size:16px;letter-spacing:6px;cursor:pointer;transition:.2s}
+button:hover{background:rgba(217,164,65,.15);text-shadow:0 0 8px var(--amber)}
+.warn{margin-top:18px;color:#5a5349;font-size:11px;letter-spacing:2px}
+
+.overlay h1{font-size:72px;letter-spacing:12px;color:var(--blood);text-shadow:0 0 28px rgba(138,22,22,.6)}
+#winScreen h1{color:var(--amber)}
+.overlay p{margin:18px 0 30px;color:#9a9389}
+
+#loader{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--amber)}
+#loader.hidden{display:none}
+.spin{width:48px;height:48px;border:2px solid #3a2d11;border-top-color:var(--amber);border-radius:50%;animation:sp 1s linear infinite}
+.loadtxt{margin-top:14px;letter-spacing:4px;font-size:12px}
+@keyframes sp{to{transform:rotate(360deg)}}
