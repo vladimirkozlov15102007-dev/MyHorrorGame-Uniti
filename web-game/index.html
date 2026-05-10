@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Old Amber Factory — Three.js Survival Horror</title>
+<link rel="stylesheet" href="./style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+  <canvas id="gl"></canvas>
+
+  <div id="vignette"></div>
+  <div id="scanlines"></div>
+  <div id="blood"></div>
+  <div id="flash"></div>
+
+  <div id="hud" class="hidden">
+    <div class="corner tl">
+      <div id="objective">OBJECTIVE: Survive the night. Find the yellow truck.</div>
+      <div id="subtitle"></div>
+    </div>
+
+    <div class="corner bl">
+      <div class="bar"><label>HP</label><div class="meter"><div id="hp" style="width:100%"></div></div><span id="hpnum">100</span></div>
+      <div class="bar"><label>STA</label><div class="meter sta"><div id="sta" style="width:100%"></div></div></div>
+    </div>
+
+    <div class="corner br">
+      <div id="ammo">7 / 35</div>
+      <div id="weapon">PISTOL</div>
+    </div>
+
+    <div class="corner tr">
+      <div id="enemies">ENEMIES: 10</div>
+      <div id="zone">ZONE: Admin</div>
+    </div>
+
+    <div id="crosshair">
+      <div class="ch ch-t"></div><div class="ch ch-b"></div>
+      <div class="ch ch-l"></div><div class="ch ch-r"></div>
+    </div>
+
+    <div id="prompt" class="hidden">[E] Interact</div>
+
+    <div id="damage-dirs">
+      <div class="dd dd-n"></div>
+      <div class="dd dd-s"></div>
+      <div class="dd dd-e"></div>
+      <div class="dd dd-w"></div>
+    </div>
+  </div>
+
+  <div id="menu">
+    <div class="menu-inner">
+      <h1>OLD AMBER FACTORY</h1>
+      <h2>Заброшенный завод «Янтарь»</h2>
+      <p class="intro">
+        You wake up at 03:12 inside the security room of an abandoned Soviet-era factory.
+        Ten ancient skeleton archers patrol the ruins.<br/>
+        Survive. Eliminate them. Reach the yellow truck. Escape.
+      </p>
+      <div class="controls">
+        <div><b>WASD</b> move</div><div><b>Shift</b> sprint</div>
+        <div><b>Space</b> jump</div><div><b>Ctrl</b> crouch</div>
+        <div><b>LMB</b> fire / charge throw</div><div><b>RMB</b> aim</div>
+        <div><b>R</b> reload</div><div><b>E</b> interact / pickup</div>
+        <div><b>G</b> drop throwable</div><div><b>F</b> flashlight</div>
+      </div>
+      <button id="startBtn">ENTER THE FACTORY</button>
+      <p class="warn">Headphones recommended. Click to lock mouse.</p>
+    </div>
+  </div>
+
+  <div id="deathScreen" class="overlay hidden">
+    <h1>YOU DIED</h1>
+    <p id="deathMsg">The factory keeps its secrets.</p>
+    <button onclick="location.reload()">TRY AGAIN</button>
+  </div>
+
+  <div id="winScreen" class="overlay hidden">
+    <h1>ESCAPED</h1>
+    <p>The yellow truck rolls into the fog. The factory fades behind you.</p>
+    <button onclick="location.reload()">PLAY AGAIN</button>
+  </div>
+
+  <div id="loader">
+    <div class="spin"></div>
+    <div class="loadtxt">Generating factory...</div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
